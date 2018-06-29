@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>我的实验报告</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all">
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/base.css" media="all">
+	<script type="text/javascript" src="http://120.78.164.47:8080/JavaBridge/jquery.min.js"></script>
+	<script type="text/javascript" src="http://120.78.164.47:8080/JavaBridge/pageoffice.js" id="po_js_main"></script>
+</head>
+<body>
+<div class='layui-fluid main'>
+	<form class="layui-form layui-form-pane" action="">
+		<div class="layui-form-item">
+			<div class="layui-input-inline">
+				<input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+			</div>
+			<button class="layui-btn" lay-submit="" lay-filter="demo2">搜索</button>
+		</div>
+	</form>
+	<table class="layui-table" lay-data="{url:'__ROOT__/Api/Report/getReportList',page:true,limit:15, id:'reportList'}" lay-filter="reportList">
+		<thead>
+		<tr>
+			<th lay-data="{field:'experiment_id', sort: true,fixed: 'left'}">ID</th>
+			<th lay-data="{field:'course_name',  sort: true}">实验课程</th>
+			<th lay-data="{field:'experiment_name'}">实验名称</th>
+			<th lay-data="{field:'teacher_name'}">教师</th>
+			<th lay-data="{field:'score', sort: true, templet: '#score'}">实验成绩</th>
+			<th lay-data="{field:'is_pass', sort: true, templet: '#status', unresize: true}">状态</th>
+			<th lay-data="{fixed: 'right', align:'center', toolbar: '#edit'}">操作</th>
+		</tr>
+		</thead>
+	</table>
+	<script type="text/html" id="edit">
+		<a class="layui-btn layui-btn-xs" href="javascript:;" lay-event="edit1">查看原文件</a>
+		<a class="layui-btn layui-btn-xs" href="javascript:;" lay-event="edit">下载原文件</a>
+		<a class="layui-btn layui-btn-xs" href="javascript:;" lay-event="edit2">下载批改后文件</a>
+	</script>
+	<script type="text/html" id="status">
+		{{#  if(d.is_pass == 0){ }}
+		<span style="color: red;">不及格</span>
+		{{#  } else if(d.is_pass == 1){ }}
+			<span style="color: #6FB737;">合格</span>
+		{{#  } }}
+	</script>
+	<script type="text/html" id="score">
+		{{#  if(d.score > 60 && d.score < 100){ }}
+		<span style="color: #6FB737;">{{d.score}}</span>
+		{{#  } else { }}
+		{{d.score}}
+		{{#  } }}
+	</script>
+
+</div>
+<script src="__PUBLIC__/layui/layui.js"></script>
+<script>
+    layui.use(['form','table', 'upload'], function(){
+        var table = layui.table
+            ,form = layui.form
+			,upload = layui.upload
+			,layer = layui.layer;
+
+        //监听工具条
+        table.on('tool(reportList)', function(obj){
+            var data = obj.data;
+            if (obj.event === 'edit1'){
+                location.href = "javascript:POBrowser.openWindowModeless('__ROOT__/Api/Report/examineReport?report_id=" + data.report_id + "&file_url="+ data.file_url +"&file_path=" + data.file_path +"', 'width=1050px;height=900px;');";
+            } else if(obj.event === 'edit'){
+                location.href = data.file_url;
+            } else if(obj.event === 'edit2'){
+                location.href = data.examine_file_url;
+            }
+        });
+    });
+</script>
+</body>
+</html>

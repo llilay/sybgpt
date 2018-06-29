@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>实验报告详情</title>
+	<meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/base.css" media="all">
+    <style type="text/css">
+		td{line-height:30px;}
+		tr>td:last-child{text-indent:20px;}
+		.layui-elem-quote{margin-top: 30px;}
+	</style>
+</head>
+<body>
+	<div class='layui-fluid main'>
+		<blockquote class="layui-elem-quote layui-quote-nm">
+			<span class="layui-breadcrumb">
+			  	<a href="__ROOT__/index.php/Home/Report/reportList.html">实验报告管理</a>
+			  	<a><cite>班级实验报告详情</cite></a>
+			</span>
+		</blockquote>
+		<blockquote class="layui-elem-quote">
+		 	<table>
+			    <tbody>
+			      <tr>
+			        <td align="right">实验名称:</td>
+			        <td>实验1</td>
+			      </tr>
+			      <tr>
+			        <td align="right">授课教师:</td>
+			        <td>22222</td>
+			      </tr>
+			      <tr>
+			        <td align="right">年级:</td>
+			        <td>2014级</td>
+			      </tr>
+			      <tr>
+			        <td align="right">院系:</td>
+			        <td>计算机工程学院</td>
+			      </tr>
+			      <tr>
+			        <td align="right">专业:</td>
+			        <td>科学与技术</td>
+			      </tr>
+			      <tr>
+			        <td align="right">班级:</td>
+			        <td>1班</td>
+			      </tr>
+			    </tbody>
+		  	</table>
+		</blockquote>
+		<table class="layui-table" lay-data="{url:'__ROOT__/Api/Role/getRoleList',page:true,limit:15, id:'roleList'}" lay-filter="roleList">
+		  	<thead>
+			    <tr>
+			      	<th lay-data="{field:'role_id', width:80, sort: true}">学号</th>
+			      	<th lay-data="{field:'role_name', sort: true, edit: 'text'}">姓名</th>
+			      	<th lay-data="{field:'role_name', sort: true, edit: 'text'}">是否提交</th>
+			      	<th lay-data="{field:'role_name', sort: true, edit: 'text'}">审核状态</th>
+			      	<th lay-data="{field:'status',width:80,  sort: true, templet: '#status', unresize: true}">状态</th>
+			      	<th lay-data="{fixed:'right', align:'center', toolbar: '#edit'}">操作</th>
+			    </tr>
+		  	</thead>
+		</table>
+		<script type="text/html" id="edit">
+  			<a href="__ROOT__/Home/Report/correcting.html" class="layui-btn layui-btn-xs" lay-event="edit">
+				<i class="layui-icon">&#xe6b2;</i>批改
+			</a>
+			<a href="" class="layui-btn layui-btn-xs" lay-event="edit">
+				<i class="layui-icon">&#xe601;</i>下载
+			</a>
+		</script>
+	</div>
+	<script src="__PUBLIC__/layui/layui.js"></script>
+	<script>
+		layui.use(['form','table','element'], function(){
+			var table = layui.table
+				,form = layui.form
+				,element = layui.element;
+		  	
+		  	
+		});
+	</script>
+</body>
+</html>

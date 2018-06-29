@@ -1,0 +1,755 @@
+{
+	"info": {
+		"_postman_id": "b73acdd6-f491-41f3-97e7-6eec70cccc0f",
+		"name": "ty",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "用户登录",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "account",
+							"value": "admin",
+							"description": "用户账号",
+							"type": "text"
+						},
+						{
+							"key": "pwd",
+							"value": "1234",
+							"description": "用户密码",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "ty.com/api/user/login",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "教师提交批改后的实验报告",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "report_id",
+							"value": "18",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "score",
+							"value": "101",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://ty.com/api/report/confirmExamineReport?",
+					"protocol": "http",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"report",
+						"confirmExamineReport"
+					],
+					"query": [
+						{
+							"key": "report_id",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "score",
+							"value": "101",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "管理员审核教师批改后的实验报告",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "report_id",
+							"value": "29",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "0",
+							"description": "*审核状态: 0审核未通过, 1审核通过",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://ty.com/api/report/approvalExamineReport",
+					"protocol": "http",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"report",
+						"approvalExamineReport"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户管理-获取用户列表",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "ty",
+							"description": "根据name搜索用户",
+							"type": "text"
+						},
+						{
+							"key": "role_id",
+							"value": "2",
+							"description": "用户角色: 1管理员,  5教师, 6学生",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "1",
+							"description": "页数(不传时默认为第一页)",
+							"type": "text"
+						},
+						{
+							"key": "limit",
+							"value": "2",
+							"description": "条数(不传时默认取20条)",
+							"type": "text"
+						},
+						{
+							"key": "user_status",
+							"value": "",
+							"description": "用户状态(不传时默认为1): 0冻结, 1正常",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://ty.com/api/user/getuserlist",
+					"protocol": "http",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"getuserlist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取实验报告列表",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "2",
+							"description": "user表主键Id",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://ty.com/api/report/getreportlist",
+					"protocol": "http",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"report",
+						"getreportlist"
+					]
+				},
+				"description": "「学生」只可看到学生自己上传的实验报告\n「教师」可以看到教师自己教授的课程下的所有实验报告,(例如物理老师可以看到物理这门课下的实验报告, 但不可看到化学下的实验报告)"
+			},
+			"response": []
+		},
+		{
+			"name": "学生上传实验报告",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "2",
+							"description": "用户ID, user表主键ID",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "experiment_id",
+							"value": "1",
+							"description": "*实验ID,  experiment表主键ID",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"description": "*要上传的文件, 只可上传 doc/docx 的文件",
+							"type": "file"
+						}
+					]
+				},
+				"url": {
+					"raw": "ty.com/api/report/addReport",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"report",
+						"addReport"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "教师上传实验报告模板",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "4",
+							"description": "*用户ID, user表主键ID",
+							"type": "text"
+						},
+						{
+							"key": "experiment_id",
+							"value": "2",
+							"description": "*实验ID,  experiment表主键ID",
+							"type": "text"
+						},
+						{
+							"key": "template_name",
+							"value": "波粒二象性实验报告模板",
+							"description": "*实验报告模板名称",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"description": "*要上传的文件, 只可上传 doc/docx 的文件",
+							"type": "file"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://ty.com/api/template/addReportTemplate",
+					"protocol": "http",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"template",
+						"addReportTemplate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取实验报告模板列表",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://ty.com/api/template/getreporttemplatelist",
+					"protocol": "http",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"template",
+						"getreporttemplatelist"
+					]
+				},
+				"description": "任何角色都可以看到所有实验报告模板"
+			},
+			"response": []
+		},
+		{
+			"name": "获取批改后的实验报告列表",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "ty.com/api/report/getExamineReportList",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"report",
+						"getExamineReportList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "发送验证码",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "phone",
+							"value": "18883987586",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://ty.com/api/user/sendVerifyCode",
+					"protocol": "http",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"sendVerifyCode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户绑定手机",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "phone",
+							"value": "18883987532",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "2002",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://ty.com/api/user/bindPhone",
+					"protocol": "http",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"bindPhone"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "修改用户密码",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "pwd",
+							"value": "123456",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://ty.com/api/user/changepwd",
+					"protocol": "http",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"changepwd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "绑定班级",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "2",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "class_id",
+							"value": "3",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://ty.com/api/user/bindclass",
+					"protocol": "http",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"bindclass"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "绑定课程",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "3",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "course_id_str",
+							"value": "",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://ty.com/api/user/bindCourse",
+					"protocol": "http",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"bindCourse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "添加通告",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "notice_title",
+							"value": "1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1aaaaaaaaaaaaa",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "notice_content",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "21aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1aaaaaaaaaaaaa",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://ty.com/api/notice/addnotice",
+					"protocol": "http",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"notice",
+						"addnotice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取通告列表",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://ty.com/api/notice/getnoticelist",
+					"protocol": "http",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"notice",
+						"getnoticelist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取实验批改历史列表",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "ty.com/api/report/getReportExamineHistoryList",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"report",
+						"getReportExamineHistoryList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取年级列表",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://ty.com/api/baseinfo/getgradelist",
+					"protocol": "http",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"baseinfo",
+						"getgradelist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "添加年级",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grade_name",
+							"value": "2019",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://ty.com/api/baseinfo/addgrade",
+					"protocol": "http",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"baseinfo",
+						"addgrade"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "添加用户",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "role_id",
+							"value": "6",
+							"description": "*角色id",
+							"type": "text"
+						},
+						{
+							"key": "account",
+							"value": "18883987588",
+							"description": "*用户账号",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "wl",
+							"description": "*用户名",
+							"type": "text"
+						},
+						{
+							"key": "pwd_type",
+							"value": "1",
+							"description": "*默认密码类型: 1=>默认密码123456, 2=>账户后6位, 3=>与账户相同",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://ty.com/api/user/addUser",
+					"protocol": "http",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"addUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取实验列表",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://ty.com/api/experiment/getExperimentList",
+					"protocol": "http",
+					"host": [
+						"ty",
+						"com"
+					],
+					"path": [
+						"api",
+						"experiment",
+						"getExperimentList"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

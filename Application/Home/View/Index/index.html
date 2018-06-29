@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>实验报告管理系统</title>
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/fonts/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/app.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/themes/blue.css" media="all">
+</head>
+
+<body class="kit-theme">
+    <div class="layui-layout layui-layout-admin kit-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">REPORT ADMIN</div>
+            <div class="layui-logo kit-logo-mobile">R</div>
+            <ul class="layui-nav layui-layout-right kit-nav" lay-filter="kitNavbar" kit-navbar>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img"> 
+                        <script>document.write(localStorage.getItem('name'))</script>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+	                <a href="javascript:;" onclick="logout()">
+	                	<i class="fa fa-sign-out" aria-hidden="true"></i> 注销
+	                </a>
+                </li>
+            </ul>
+        </div>
+        <div class="layui-side layui-bg-black kit-side">
+            <div class="layui-side-scroll">
+                <div class="kit-side-fold">
+                	<i class="fa fa-navicon" aria-hidden="true"></i>
+                </div>
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
+                    <volist name="data" id="vo" empty="暂时没有数据" >
+                    	<li class="layui-nav-item">
+	                        <a class="" href="javascript:;">
+		                        <notempty name="vo['icon_url']">
+									<i class="{$vo.icon_url}" aria-hidden="true"></i>
+								</notempty>
+		                        <span> {$vo.menu_name}</span>
+	                        </a>
+	                        <dl class="layui-nav-child">
+		                        <volist name="vo['children']" id="ch" empty="暂时没有数据" >
+	                            	<dd>
+		                                <a href="javascript:;" data-url="{$ch.url}" data-icon="{$ch.icon_url}" data-title="{$ch.menu_name}" kit-target data-id='{$ch.menu_id}'>
+			                                <notempty name="ch['icon_url']">
+												<i class="{$ch.icon_url}" aria-hidden="true"></i>
+											</notempty>
+			                                <span> {$ch.menu_name}</span>
+		                                </a>
+		                            </dd>
+	                            </volist>
+	                        </dl>
+	                    </li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+        <div class="layui-body" id="container">
+            <!-- 内容主体区域 -->
+            <div style="padding: 15px;">主体内容加载中,请稍等...</div>
+        </div>
+
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            <script type="text/javascript">
+                var data = new Date();
+                document.write(data.getFullYear());
+            </script> &copy;
+            <a href="__ROOT__/Home/Index/index.html">实验报告管理系统</a>
+        </div>
+    </div>
+    <script src="__PUBLIC__/layui/layui.js"></script>
+    <script>
+        function logout() {
+            localStorage.clear();
+            location.href = '__ROOT__/Api/User/logout';
+        }
+        var message;
+        layui.config({
+            base: '__PUBLIC__/Home/js/'
+        }).use(['app', 'message'], function() {
+            var app = layui.app,
+                $ = layui.jquery,
+                layer = layui.layer;
+            //将message设置为全局以便子页面调用
+            message = layui.message;
+            //主入口
+            app.set({
+                type: 'iframe'
+            }).init();
+            $('#pay').on('click', function() {
+                layer.open({
+                    title: false,
+                    type: 1,
+                    content: '<img src="__PUBLIC__/Home/images/pay.png" />',
+                    area: ['500px', '250px'],
+                    shadeClose: true
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+.main,blockquote.layui-elem-quote{margin-top: 25px;}
+form{display:inline-block;}
+.layui-body{overflow-y: scroll;}
+.layui-table-page{text-align:center;}
+.layui-form-checked, .layui-form-checked:hover {border-color: red;}
+.layui-form-checked span, .layui-form-checked:hover span {background-color: red;}
+.layui-form-checked i, .layui-form-checked:hover i {color: red;}

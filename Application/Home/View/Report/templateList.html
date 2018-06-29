@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>菜单管理</title>
+	<meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/base.css" media="all">
+</head>
+<body>
+	<div class='layui-fluid main'>
+		<script>
+            if(localStorage.role_id == 5){
+                document.write("<a class='layui-btn layui-btn-sm' href='__ROOT__/Home/Report/addTemplate.html'><i class='layui-icon'>&#xe654;</i>上传实验报告</a>");
+            } else {
+
+            }
+		</script>
+
+	  	<form class="layui-form layui-form-pane" action="">
+	        <div class="layui-form-item">
+	            <div class="layui-input-inline">
+	                <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+	            </div>
+				<button class="layui-btn" lay-submit="" lay-filter="search">搜索</button>
+	        </div>
+	    </form>
+		<table class="layui-table" lay-data="{url:'__ROOT__/Api/Template/getReportTemplateList',page:true,limit:15, id:'templateList'}" lay-filter="templateList">
+		  	<thead>
+			    <tr>
+					<th lay-data="{type:'numbers'}"></th>
+			      	<!--<th lay-data="{field:'course_id', sort: true}">课程ID</th>-->
+					<th lay-data="{field:'course_name', sort: true}">课程名</th>
+					<th lay-data="{field:'experiment_name', sort: true}">实验名称</th>
+					<th lay-data="{field:'teacher_name', sort: true}">教师姓名</th>
+			      	<th lay-data="{field:'template_name', sort: true, edit: 'text'}">模板名称</th>
+			      	<th lay-data="{field:'create_time', sort: true}">创建时间</th>
+			      	<th lay-data="{fixed: 'right', align:'center', toolbar: '#edit'}">操作</th>
+
+			    </tr>
+		  	</thead>
+		</table>
+		<script type="text/html" id="edit">
+			{{#  if(localStorage.role_id == 5){ }}
+
+			{{#  } else { }}
+
+			{{#  } }}
+			<a class="layui-btn layui-btn-xs" href="javascript:;" lay-event="download">立即下载</a>
+		</script>
+	</div>
+	<script src="__PUBLIC__/layui/layui.js"></script>
+	<script>
+		layui.use(['form', 'table'], function(){
+		  	var table = layui.table
+		  		,form = layui.form; //得到 upload 对象
+
+            //监听工具条
+            table.on('tool(templateList)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+                var data = obj.data; //获得当前行数据
+                var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值
+
+                if(layEvent === 'download'){ //查看
+					location.href = data.file_url;
+                }
+            });
+
+
+		});
+	</script>
+</body>
+</html>

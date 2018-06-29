@@ -1,0 +1,299 @@
+ <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>初见首页</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="__PUBLIC__/Home/css/bootstrap.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Stylesheets -->
+    <link href="__PUBLIC__/Home/css/font-awesome.css" rel="stylesheet">
+    <link href="__PUBLIC__/Home/css/style.css" rel="stylesheet" type="text/css">
+
+    <!-- Loading Custom Stylesheets -->
+    <link href="__PUBLIC__/Home/css/custom.css" rel="stylesheet">
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+<style>
+a{ cursor:pointer}
+</style>
+
+</head>
+
+<body>
+  <div class="site-holder">
+    <nav class="navbar" role="navigation">
+        <div class="navbar-header">
+          <span class="navbar-brand">
+              <i class="fa fa-list btn-nav-toggle-responsive text-white"></i> 
+                <span class="logo">Firstface<i class="fa fa-hand-o-left"></i></span>
+            </span>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav user-menu navbar-right ">
+              <li><a href="#" class="user dropdown-toggle" data-toggle="dropdown"><span class="username"><img src="__PUBLIC__/Home/img/head.jpg" class="user-avatar" alt=""> 欢迎<?php echo $_SESSION['name'];?>登录</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{:U('Login/upd')}" target="main"><i class="fa fa-cogs"></i> 修改密码</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{:U('Login/index')}" class="text-danger"><i class="fa fa-lock"></i> 退出系统</a></li>
+                     </ul>
+                 </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="box-holder">
+        <div class="left-sidebar">
+            <div class="sidebar-holder">
+                <ul class="nav  nav-list">
+                    <li class="nav-toggle">
+                        <button class="btn  btn-nav-toggle text-primary"><i class="fa fa-angle-double-left toggle-left"></i> 
+                        </button>
+                    </li>
+                    <li><a data-original-title="Dashboard"><i class="fa fa-leaf"></i>
+                        <span class="hidden-minibar">会员管理 </span></a>
+                        <ul>
+                          <li style="margin-left:35px">
+                              <a href="{:U('orderss/index')}" data-original-title="Dynamic" target="main">
+                              <i class="fa fa-envelope-o"></i><span> 查看订单信息</span>
+                              </a>
+                           </li>
+                        </ul>     
+                    </li>              
+                  
+                        
+                            <li><a data-original-title="Dashboard"><i class="fa fa-male"></i>
+                                <span class="hidden-minibar">好友管理 </span></a>
+                                <ul>
+                                    <li style="margin-left:35px">
+                                        <a href="{:U('Fridend/index')}" data-original-title="Dynamic" target="main">
+                                            <i class="fa fa-eye"></i><span> 查看好友</span>
+                                        </a>
+                                    </li>
+                                    <!-- <li style="margin-left:35px">
+                                        <a href="{:U('Series/add_series')}" target="main" data-original-title="Dynamic">
+                                            <i class="fa fa-plus-square"></i><span> 添加系列</span>
+                                        </a>
+                                    </li> --> 
+                                </ul> 
+                        </li>
+                        
+                    <li><a data-original-title="Dashboard"><i class="fa fa-anchor"></i>
+                        <span class="hidden-minibar">通讯管理 </span></a>
+                        <ul>
+                            <li style="margin-left:35px">
+                                <a href="{:U('Goods/show_goods')}" data-original-title="Dynamic" target="main">
+                                    <i class="fa fa-search-plus"></i><span> 查看商品信息</span>
+                                </a>
+                            </li>
+                            <li style="margin-left:35px">
+                                <a href="{:U('Goods/add_goods')}" target="main" data-original-title="Dynamic">
+                                    <i class="fa fa-plus-square"></i><span> 添加商品信息</span>
+                                </a>
+                            </li> 
+                        </ul> 
+                </li>
+                        
+                   
+                <li><a data-original-title="Dashboard"><i class="fa fa-user"></i>
+                        <span class="hidden-minibar">商城管理</span></a>
+                      <ul>
+                          <li style="margin-left:35px">
+                              <a href="{:U('Type/show')}" data-original-title="Dynamic" target="main">
+                                <i class="fa fa-search-plus"></i><span>商品类型显示</span>
+                              </a>
+                          </li>
+                            <li style="margin-left:35px"><a href="{:U('Type/add')}" target="main" data-original-title="Dynamic">
+                              <i class="fa fa-warning"></i><span>添加商品类型</span></a>
+                              </li>     
+                            <li style="margin-left:35px">
+                              <a href="{:U('Size/show')}" data-original-title="Dynamic" target="main">
+                                <i class="fa fa-search-plus"></i><span>商品尺码显示</span>
+                              </a>
+                          </li> 
+                           <li style="margin-left:35px">
+                              <a href="{:U('Size/add')}" data-original-title="Dynamic" target="main">
+                                <i class="fa fa-search-plus"></i><span>添加商品尺码</span>
+                              </a>
+                          </li>      
+                      </ul>  
+                    </li>
+                <li><a data-original-title="Dashboard"><i class="fa fa-legal"></i>
+                        <span class="hidden-minibar">动态管理</span></a>
+                      <ul>
+                          <li style="margin-left:35px">
+                              <a href="{:U('Dynamic/index')}" data-original-title="Dynamic" target="main">
+                                <i class="fa fa-eye"></i><span>查看动态</span>
+                              </a>
+                                <!-- <a href="{:U('Evaluate/show_evaluate_1')}" data-original-title="Dynamic" target="main">
+                                <i class="fa fa-search-plus"></i><span>已审核评价</span>
+                              </a> -->
+                          </li> 
+                      </ul>  
+                    </li>
+                    <li><a data-original-title="Dashboard"><i class="fa fa-flask"></i>
+                        <span class="hidden-minibar">服务管理</span></a>
+                      <ul>
+                          <li style="margin-left:35px">
+                              <a href="{:U('Leaveword/show_leaveword')}" data-original-title="Dynamic" target="main">
+                                <i class="fa fa-search-plus"></i><span>查看留言</span>
+                              </a>
+                          </li> 
+                      </ul>  
+                    </li>
+                    
+                    <li><a data-original-title="Dashboard"><i class="fa fa-print"></i>
+                        <span class="hidden-minibar">公告管理</span></a>
+                      <ul>
+                          <li style="margin-left:35px">
+                              <a href="{:U('Proclamation/show_proclamation')}" data-original-title="Dynamic" target="main">
+                                <i class="fa fa-search-plus"></i><span>查看公告</span>
+                              </a>
+                          </li> 
+                            <li style="margin-left:35px">
+                                <a href="{:U('Proclamation/add_proclamation')}" target="main" data-original-title="Dynamic">
+                                   <i class="fa fa-plus-square"></i><span>添加公告</span>
+                                </a>
+                           </li>  
+                      </ul>  
+                    </li>
+                    <if condition=" $_SESSION['zhiwei'] eq 超级管理员 ">
+                    <li><a data-original-title="Dashboard"><i class="fa fa-road"></i>
+                        <span class="hidden-minibar">管理员管理</span></a>
+                      <ul>
+                          <li style="margin-left:35px">
+                              <a href="{:U('Manager/show_manager')}" data-original-title="Dynamic" target="main">
+                                <i class="fa fa-search-plus"></i><span>查看管理员</span>
+                              </a>
+                          </li> 
+                            <li style="margin-left:35px">
+                                <a href="{:U('Manager/add_manager')}" target="main" data-original-title="Dynamic">
+                                   <i class="fa fa-plus-square"></i><span>添加管理员</span>
+                                </a>
+                           </li>  
+                      </ul>  
+                    </li>
+                    <else/>
+                    <li><a data-original-title="Dashboard"><i class="fa fa-road"></i>
+                        <span class="hidden-minibar">管理员管理</span></a>
+                      <ul>
+                          <li style="margin-left:35px">
+                              <a href="{:U('Manager/show_manager')}" data-original-title="Dynamic" target="main">
+                                <i class="fa fa-search-plus"></i><span>查看管理员</span>
+                              </a>
+                          </li> 
+                         </ul>
+                     </if>
+                </ul>
+            </div>
+        </div>
+        <!-- /.left-sidebar -->
+    
+        <!-- .content -->
+        <div class="content">
+            <div class="row">
+                <div class="col-mod-12">
+                    <div class="form-group hiddn-minibar pull-right">
+                        <span class="input-icon fui-search"></span>
+                    </div>
+                    <h3 class="page-header">
+                    <i class="fa fa fa-dashboard"></i> 
+                    www.lvfamily.com</h3>
+    
+                </div>
+            </div>
+            <div class="row">
+           
+                <div class="col-md-12">
+                    <div class="panel">
+                    
+                        <div class="panel-body">
+    <iframe name="main" width="103%" height="586px" style=" margin-left:-10px;margin-top:-27px" src="{:U('Index/welcome')}">
+                            
+                            </iframe>
+                        </div>
+                       
+                    </div>
+                </div>
+                
+            </div>
+            <div class="footer">
+                © 2018 <a href="#">初见管理系统</a>
+            </div>
+    
+        </div>
+        <div class="right-sidebar right-sidebar-hidden">
+            <div class="right-sidebar-holder">
+                <a href="screens.html" class="btn btn-danger btn-block">Logout </a>
+                <h4 class="page-header text-primary text-center">
+                            Theme Options
+                            <a  href="#"  class="theme-panel-close text-primary pull-right"><strong><i class="fa fa-times"></i></strong></a>
+                        </h4>
+    
+                <ul class="list-group theme-options">
+                    <li class="list-group-item" href="#">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="fixedNavbar" value="">Fixed Top Navbar
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="fixedNavbarBottom" value="">Fixed Bottom Navbar
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="boxed" value="">Boxed Version
+                            </label>
+                        </div>
+    
+                        <div class="form-group backgroundImage hidden">
+                            <label class="control-label">Paste Image Url and then hit enter</label>
+                            <input type="text" class="form-control" id="backgroundImageUrl" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+  
+    <!-- Load JS here for Faster site load =============================-->
+  
+    <script src="__PUBLIC__/admin/js/jquery-1.11.1.min.js"></script>
+    
+    <script src="__PUBLIC__/admin/js/jquery.dataTables.min.js"></script>
+    
+    <script src="__PUBLIC__/admin/js/jquery-ui-1.10.3.custom.min.js"></script>
+    
+    
+    <script src="__PUBLIC__/admin/js/bootstrap.min.js"></script>
+    
+    <script src="__PUBLIC__/admin/js/dataTables.bootstrap.js"></script>
+    
+    <script src="__PUBLIC__/admin/js/bootstrap-select.js"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap-switch.js"></script>
+    <script src="__PUBLIC__/admin/js/jquery.placeholder.js"></script>
+    <script src="__PUBLIC__/admin/js/bootstrap-typeahead.js"></script>
+    <script src="__PUBLIC__/admin/js/application.js"></script>
+    <script src="__PUBLIC__/admin/js/moment.min.js"></script>
+    <script src="__PUBLIC__/admin/js/jquery.sortable.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/admin/js/jquery.gritter.js"></script>
+    <script src="__PUBLIC__/admin/js/jquery.nicescroll.min.js"></script>
+    <script src="__PUBLIC__/admin/js/prettify.min.js"></script>
+    <script src="__PUBLIC__/admin/js/jquery.noty.js"></script>
+    <script src="__PUBLIC__/admin/js/jquery.accordion.js"></script>
+    <script src="__PUBLIC__/admin/js/skylo.js"></script>
+
+    <script src="__PUBLIC__/admin/js/theme-options.js"></script>
+
+    <!-- Core Jquery File  =============================-->
+    <script src="__PUBLIC__/admin/js/core.js"></script>
+
+</body>
+
+</html>

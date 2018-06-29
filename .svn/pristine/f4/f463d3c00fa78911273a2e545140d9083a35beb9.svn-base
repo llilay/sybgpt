@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>菜单管理</title>
+	<meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/base.css" media="all">
+	<script type="text/javascript" src="http://120.78.164.47:8080/JavaBridge/jquery.min.js"></script>
+	<script type="text/javascript" src="http://120.78.164.47:8080/JavaBridge/pageoffice.js" id="po_js_main"></script>
+</head>
+<body>
+	<div class="layui-fluid main">
+		<div class="demoTable main">
+		  	ID：
+		  	<div class="layui-inline">
+		    	<input class="layui-input" name="id" id="searchInput" placeholder="请输入ID" autocomplete="off">
+		  	</div>
+		  	<button class="layui-btn" data-type="reload">搜索</button>
+		</div>
+		<table class="layui-table" lay-data="{url:'__ROOT__/Api/Report/getExamineReportList',page:true,limit:15, id:'reportList'}" lay-filter="reportList">
+		  	<thead>
+			    <tr>
+			      	<th lay-data="{type:'numbers', sort: true, fixed: 'left'}">ID</th>
+			      	<th lay-data="{field:'course_name'}">课程名称</th>
+			      	<th lay-data="{field:'experiment_name'}">实验名称</th>
+			      	<th lay-data="{field:'teacher_name', width: 100}">教师姓名</th>
+			      	<th lay-data="{field:'student_id', sort: true, width: 150}">学生ID</th>
+			      	<th lay-data="{field:'student_name', width: 100}">学生姓名</th>
+			      	<th lay-data="{field:'examine_status_name', templet: '#sexTpl', width: 80}">是否批改</th>
+			      	<th lay-data="{field:'is_pass_name', width: 80}">合格状态</th>
+			      	<th lay-data="{field:'score', sort: true, width: 80}">成绩</th>
+			      	<th lay-data="{fixed: 'right', align:'center', toolbar: '#edit'}">操作</th>
+			    </tr>
+		  	</thead>
+		</table>
+		<script type="text/html" id="sexTpl">
+			{{#  if(d.examine_status_name === '已批改'){ }}
+				<span style="color: #6FB737;">{{ d.examine_status_name }}</span>
+			{{#  } else { }}
+				{{ d.examine_status_name }}
+			{{#  } }}
+		</script>
+		<script type="text/html" id="edit">
+			<a class="layui-btn layui-btn-xs" href="javascript:;" lay-event="edit1">查看原文件</a>
+			<a class="layui-btn layui-btn-xs" href="javascript:;" lay-event="edit">查看原文件</a>
+			<input type="checkbox" name="lock" value="{{d.report_id}}" title="未通过" lay-filter="lockDemo" {{ d.approval_status == 0 ? '' : 'checked' }}>
+		</script>
+	</div>
+	<script src="__PUBLIC__/layui/layui.js"></script>
+	<script>
+		layui.use(['form','table','element'], function(){
+		  	var table = layui.table
+		  		,form = layui.form
+		  		,$ = layui.jquery
+		  	  	,element = layui.element;
+
+            //监听锁定操作
+            form.on('checkbox(lockDemo)', function(obj){
+                var status = obj.elem.checked === false ? 0 : 1;
+                $.post('__ROOT__/Api/Report/approvalExamineReport', {report_id: this.value, status: status}, function (re) {
+                    if (re.status == 1){
+
+                    }else {
+                        layer.alert(re.msg, { icon: 5, time: 2000, offset: 't', closeBtn: 0, title: '错误信息', btn: [], anim: 2, shade: 0 });
+                    }
+                },'json');
+            });
+
+            //监听工具条
+            table.on('tool(reportList)', function(obj){
+                var data = obj.data;
+                if (obj.event === 'edit1'){
+                    location.href = "javascript:POBrowser.openWindowModeless('__ROOT__/Api/Report/examineReport" + data.view_report_url + ");";
+                } else if(obj.event === 'edit'){
+                    location.href = "javascript:POBrowser.openWindowModeless('/Api/Report/examineReport" + data.view_examine_url + ");";
+                }
+            });
+		});
+	</script>
+</body>
+</html>
